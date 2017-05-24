@@ -1,0 +1,21 @@
+<h2><%= @message.title %></h2>
+<p>Created <%= time_ago_in_words(@message.created_at) %> ago.</p>
+<p><%= @message.description %></p>
+<p><%= image_tag(@message.image.url(:medium))%></p>
+
+<h2>Comments</h2>
+<%= render @message.comments %>
+
+<h4> Reply Here: </h4>
+<%= render 'comments/form' %>
+
+<%= link_to 'Back', root_path %>
+<% if user_signed_in? %>
+	<% if @message.user_id == current_user.id %>
+
+<%= link_to 'Edit', edit_message_path(@message) %>
+
+<%= link_to 'Delete', message_path(@message), method: :delete, confirm: "Are You Sure?" %>
+
+<% end %>
+<% end %>

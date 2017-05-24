@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MsgBoard</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <div class="navbar navbar-inverse">
+  	<div class="container">
+  		<div class="navbar-header">
+  			<%= link_to "My Board", root_path, class: "navbar-brand" %>
+  		</div>
+  		<ul class="nav navbar-nav">
+  			<li><%= link_to "Sing Up", new_user_registration_path%></li>
+  			<% if signed_in? %>
+  			<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete,confirm: "Are you sure?" %>
+  			</li>
+  			<% else %>
+  			<li><%= link_to "Log In", new_user_session_path %></li>
+  			<% end %>
+  		</ul>
+  		<% if signed_in? %>
+  		<p><%= link_to "Create Your New Post Here!", new_message_path, class: "navbar-right navbar-text" %></p>
+
+
+  		<% end %>
+
+  	</div>
+  </div>
+  <div class="container">
+    <%= yield %>
+  </div>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  
+  </body>
+</html>
